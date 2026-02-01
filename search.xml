@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> 开发工具 </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -402,11 +402,11 @@
             
             <tag> C </tag>
             
-            <tag> arm </tag>
-            
             <tag> 交叉编译 </tag>
             
             <tag> SoC </tag>
+            
+            <tag> arm </tag>
             
         </tags>
       
@@ -433,11 +433,11 @@
             
             <tag> C </tag>
             
+            <tag> RISC-V </tag>
+            
             <tag> 交叉编译 </tag>
             
             <tag> SoC </tag>
-            
-            <tag> RISC-V </tag>
             
         </tags>
       
