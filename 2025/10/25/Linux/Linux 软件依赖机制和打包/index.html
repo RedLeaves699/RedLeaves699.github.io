@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>实践中理解 Linux 软件依赖机制和打包方法 | Redleaves699's Knowlegde Base</title><meta name="author" content="Redleaves699"><meta name="copyright" content="Redleaves699"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="——记一次发布 Linux 程序时遇到的问题及解决方案 万事俱备：软件在目标机上运行成功这一次待部署的软件是一个代码约 2000 行的，使用 C++ 与 wxWidgets 图形库编写的一款简单的上位机软件，运行平台为 Linux 操作系统。目标机器为一台安装了 Debian12 的 amd64 主机。因业务需求，该主机必须单机运行，不能接入任何网络。开发主机也是使用 Debian12 系统的 a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实践中理解 Linux 软件依赖机制和打包方法">
+<meta property="og:url" content="https://redleaves699.github.io/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/index.html">
+<meta property="og:site_name" content="Redleaves699&#39;s Knowlegde Base">
+<meta property="og:description" content="——记一次发布 Linux 程序时遇到的问题及解决方案 万事俱备：软件在目标机上运行成功这一次待部署的软件是一个代码约 2000 行的，使用 C++ 与 wxWidgets 图形库编写的一款简单的上位机软件，运行平台为 Linux 操作系统。目标机器为一台安装了 Debian12 的 amd64 主机。因业务需求，该主机必须单机运行，不能接入任何网络。开发主机也是使用 Debian12 系统的 a">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://redleaves699.github.io/assets/site/avatar.jpg">
+<meta property="article:published_time" content="2025-10-25T06:46:15.000Z">
+<meta property="article:modified_time" content="2025-11-08T05:47:34.733Z">
+<meta property="article:author" content="Redleaves699">
+<meta property="article:tag" content="Glibc">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Release">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redleaves699.github.io/assets/site/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "实践中理解 Linux 软件依赖机制和打包方法",
+  "url": "https://redleaves699.github.io/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/",
+  "image": "https://redleaves699.github.io/assets/site/avatar.jpg",
+  "datePublished": "2025-10-25T06:46:15.000Z",
+  "dateModified": "2025-11-08T05:47:34.733Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Redleaves699",
+      "url": "https://redleaves699.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/assets/site/sign2.svg"><link rel="canonical" href="https://redleaves699.github.io/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '实践中理解 Linux 软件依赖机制和打包方法',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 所有文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-tools"></i><span> 在线工具</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/assets/site/library.svg" alt="Logo"><span class="site-name">Redleaves699's Knowlegde Base</span></a><a class="nav-page-title" href="/"><span class="site-name">实践中理解 Linux 软件依赖机制和打包方法</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 所有文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-tools"></i><span> 在线工具</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">实践中理解 Linux 软件依赖机制和打包方法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-25T06:46:15.000Z" title="发表于 2025-10-25 14:46:15">2025-10-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-08T05:47:34.733Z" title="更新于 2025-11-08 13:47:34">2025-11-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>——记一次发布 Linux 程序时遇到的问题及解决方案</p>
+<h3 id="万事俱备：软件在目标机上运行成功"><a href="#万事俱备：软件在目标机上运行成功" class="headerlink" title="万事俱备：软件在目标机上运行成功"></a>万事俱备：软件在目标机上运行成功</h3><p>这一次待部署的软件是一个代码约 2000 行的，使用 C++ 与 wxWidgets 图形库编写的一款简单的上位机软件，运行平台为 Linux 操作系统。目标机器为一台安装了 Debian12 的 amd64 主机。因业务需求，该主机必须单机运行，不能接入任何网络。开发主机也是使用 Debian12 系统的 amd64 主机。故将开发主机上编译好的二进制文件部署到目标机器时，软件可以正常运行。后续又对软件进行了几次修改和重新部署，均未发生问题。</p>
+<h3 id="埋下隐患：将开发主机系统由-Debian12-升级为-Debian13"><a href="#埋下隐患：将开发主机系统由-Debian12-升级为-Debian13" class="headerlink" title="埋下隐患：将开发主机系统由 Debian12 升级为 Debian13"></a>埋下隐患：将开发主机系统由 Debian12 升级为 Debian13</h3><p>2025年8月9日，Debian 的新稳定版 Debian13 Trixie 正式发布，新系统使用了更新的软件包，升级了 Wayland，可以支持更高的分辨率，极大优化了用户体验。2025年9月18日，我将当前系统升级到了该版本，升级时遇到了一些小问题，不过很快都得到了解决。然而，这次升级却埋下了问题的种子。</p>
+<h3 id="事与愿违：为什么好好的程序不能运行了？"><a href="#事与愿违：为什么好好的程序不能运行了？" class="headerlink" title="事与愿违：为什么好好的程序不能运行了？"></a>事与愿违：为什么好好的程序不能运行了？</h3><p>为了降低软件使用门槛，用户提出了新的需求：修改系统中一些参数的默认初始值。因为系统的一些默认的初始值是硬编码在程序中的，所以需要重新编译部署一次。如同往常一样，我在开发主机上敲下<code>cmake ..</code>和<code>make</code>命令，胸有成竹的将生成的二进制文件拷入目标机器，期待它能够正常运行。然而，当我用鼠标点击多次后，软件界面没有显示。我意识到大事不妙，打开命令行运行，一行报错赫然出现在眼前：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/main: /lib64/libc.so.6: version `GLIBC_2.38` not found (required by ./main)</span><br></pre></td></tr></table></figure>
+
+<h3 id="先入为主：提出一种可行的解决方案——Linux-软件打包"><a href="#先入为主：提出一种可行的解决方案——Linux-软件打包" class="headerlink" title="先入为主：提出一种可行的解决方案——Linux 软件打包"></a>先入为主：提出一种可行的解决方案——Linux 软件打包</h3><p>明明系统安装了 glibc，为什么会找不到呢？再看一眼，发现是找不到 GLIBC_2.38。目标机器 Debian12 的 glibc 版本是 2.36，这说明程序运行需求 glibc 版本要高于当前系统。</p>
+<p>针对这个问题，我当时想到了一个办法。链接器报错只会报第一个遇到的错误，既然以 glibc 为代表的软件动态库与目标机器当前系统不匹配，那么其他的动态库也可能会报类似错误。为了在今后避免这个问题，增加软件兼容性，我应该把软件主程序与动态库放在一起，就像常见的 Windows 软件那样。遵循这个想法，我使用下面的步骤尝试解决问题：</p>
+<p>首先在开发主机上查询软件所有的依赖库，然后复制一份到软件的<code>lib</code>目录下，随后在编译时使用 RPATH 参数指定软件优先从<code>lib</code>目录查找运行库。最后复制运行软件需要的链接器<code>ld-linux-x86-64.so.2</code>。运行时，让这个链接器代替目标机器的链接器链接这些库就可以了。</p>
+<p>我当时实现这个思路的操作如下：</p>
+<ol>
+<li>复制依赖库和链接器。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Usage: ./libcopy.sh &lt;executable&gt; &lt;directory&gt;&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Effect: Copy the dependency of <span class="variable">$1</span> to directory <span class="variable">$2</span>&quot;</span></span><br><span class="line">dependency_list=$(ldd <span class="variable">$1</span> | awk <span class="string">&#x27;&#123;if (match($3,&quot;/&quot;))&#123;print $3&#125;&#125;&#x27;</span>)</span><br><span class="line"><span class="comment"># echo $dependency_list</span></span><br><span class="line"><span class="built_in">cp</span> -L -n <span class="variable">$dependency_list</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">cp</span> -L -n /lib64/ld-linux-x86-64.so.2 <span class="variable">$2</span></span><br></pre></td></tr></table></figure></li>
+<li>指定 RPATH 参数让链接器优先链接指定目录的动态库。（使用cmake） <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_SKIP_RPATH <span class="keyword">FALSE</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_WITH_INSTALL_RPATH <span class="keyword">TRUE</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_INSTALL_RPATH <span class="string">&quot;$ORIGIN/../lib&quot;</span> <span class="string">&quot;$ORIGIN/../lib&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>设置编译参数使<code>lib</code>的链接器代替系统默认链接器。（使用cmake） <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS <span class="string">&quot;-Wl,-dynamic-linker=../lib/ld-linux-x86-64.so.2&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这在使用这个解决方案后，glibc 的问题解决了，但拷入到目标机器运行时，另外的问题出现了，软件的一个依赖包 libwx_gtk3u_core-3.2.so.0 报错，提示这个包必须在 GLIBC_2.38 运行。为什么会出现这种情况呢？</p>
+<h3 id="追根溯源：Linux-软件如何寻找动态库及正确打包方案"><a href="#追根溯源：Linux-软件如何寻找动态库及正确打包方案" class="headerlink" title="追根溯源：Linux 软件如何寻找动态库及正确打包方案"></a>追根溯源：Linux 软件如何寻找动态库及正确打包方案</h3><p>解决这个问题需要对 Linux 的动态链接有一定的了解，下面需要我们仔细探究 Linux 动态链接的过程。</p>
+<p>在开发机器上使用<code>ldd</code>命令查看软件需要的动态库是如何链接的：我们发现了让人疑惑的结果，只有软件程序直接需要的库（可以用<code>readelf -d</code>命令看到）被链接到了我们指定的<code>lib</code>目录，其他被这些库间接需要的库仍然被链接到系统默认目录（<code>/lib</code>，<code>/usr/lib</code>）中。</p>
+<p>看起来好像是我们为程序设置的 RPATH 变量出了问题，实际上，RPATH 变量的设置是正确的。这里涉及到 Linux 动态库链接的一个机制。Linux 的库依赖是一个 DAG 图结构，链接器会自顶向下搜索每个库，找到它们在系统中的位置。首先是主程序，由于主程序设置了 RPATH 变量，所以这次查找将优先选择 RPATH 变量中匹配的运行库。之后，链接器继续遍历，选择这些运行库的一个（如 libwx_gtk3u_core-3.2.so.0），查找其依赖库。问题就出现在这里，查找 libwx_gtk3u_core-3.2.so.0 库的依赖库时，由于 libwx_gtk3u_core-3.2.so.0 库是我们直接从开发主机操作系统复制过来的，并没有设置 RPATH，链接器并不会在我们指定的<code>lib</code>目录寻找依赖库。所以，所有 libwx_gtk3u_core-3.2.so.0 的依赖库都将从系统默认目录中寻找。</p>
+<p>在目标机器上运行时，libwx_gtk3u_core-3.2.so.0 这个库是主程序直接依赖的，所以使用的是我们指定的<code>lib</code>目录的新版库，然而，由于这个库没有设置 RPATH 的缘故，链接器会从系统寻找这个库需要的依赖，其中的一些就属于系统上的旧版 glibc（比如<code>libstdc++.so.6</code>）。而开发主机操作系统中的 libwx_gtk3u_core-3.2.so.0 这个库需要更新的 glibc，与目标机操作系统的旧版 glibc 不适配，自然会产生报错。</p>
+<p>由此，我们终于可以找到解决方案了。使用 patchelf 软件，<strong>将复制的所有动态链接库都增加 RPATH 属性</strong>即可。第一步的操作增加这一步就是正确的打包方案了。</p>
+<p>上面的方式略显繁琐，且会导致软件包过大，但可以在保证软件的兼容性减少思考量。然而，我们可以简单分析一下程序的依赖，从而减少软件包的大小。我们首先使用<code>readelf -d</code>命令查看程序使用的所有依赖组件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ readelf -d main</span><br><span class="line"></span><br><span class="line">Dynamic section at offset 0x6ed70 contains 33 entries:</span><br><span class="line">  Tag        Type                         Name/Value</span><br><span class="line"> 0x0000000000000001 (NEEDED)             Shared library: [libwx_gtk3u_core-3.2.so.0]</span><br><span class="line"> 0x0000000000000001 (NEEDED)             Shared library: [libwx_baseu-3.2.so.0]</span><br><span class="line"> 0x0000000000000001 (NEEDED)             Shared library: [libpulse-simple.so.0]</span><br><span class="line"> 0x0000000000000001 (NEEDED)             Shared library: [libpulse.so.0]</span><br><span class="line"> 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]</span><br><span class="line"> 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]</span><br><span class="line"> 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]</span><br></pre></td></tr></table></figure>
+
+<p>发现程序依赖 wxWidgets,pulseaudio,libstdc++,libgcc_s.so.1,libc.so.6 五个组件，由于我们这次的改动只是几个常量的变动，不涉及任何运行库新特性的使用，所以我们可以继续使用目标机器上已安装的 wxWidgets,pulseaudio 库。为了程序在目标机器运行时，链接器将<strong>目标机器</strong>系统中安装的两个库链接到程序中，<code>lib</code>目录下不应存在这两个库。对于剩下三个库，由于目标程序对这三个库的版本做出了要求，所以不可以使用目标机器的系统库，应当从<strong>开发主机</strong>复制这三个库及其所有依赖，以及支持链接这三个新库的新版链接器。复制后将所有动态库的<code>rpath</code>修改。</p>
+<p>实现操作如下：</p>
+<ol>
+<li>复制依赖库并修改<code>rpath</code>，最后复制链接器，$1 为<code>lib</code>目录。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Usage: ./glibcopy.sh &lt;directory&gt;&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Effect: Copy the glibc dependency to directory <span class="variable">$1</span>&quot;</span></span><br><span class="line"><span class="built_in">cp</span> -L -n /usr/lib/x86_64-linux-gnu/libstdc++.so.6 <span class="variable">$1</span> <span class="comment"># 依赖libc.so.6，libm.so.6，libgcc_s.so.1</span></span><br><span class="line"><span class="built_in">cp</span> -L -n /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 <span class="variable">$1</span> <span class="comment"># 依赖libc.so.6</span></span><br><span class="line"><span class="built_in">cp</span> -L -n /usr/lib/x86_64-linux-gnu/libm.so.6 <span class="variable">$1</span> <span class="comment"># 依赖libc.so.6</span></span><br><span class="line"><span class="built_in">cp</span> -L -n /usr/lib/x86_64-linux-gnu/libc.so.6 <span class="variable">$1</span> <span class="comment"># 不依赖其他库</span></span><br><span class="line">patchelf * --set-rpath <span class="string">&#x27;$ORIGIN&#x27;</span> <span class="comment"># 改变所有动态库的 rpath</span></span><br><span class="line"><span class="built_in">cp</span> -L -n /lib64/ld-linux-x86-64.so.2 <span class="variable">$1</span> <span class="comment"># 最后复制链接器，注意不能修改它的rpath，它不是动态库！</span></span><br></pre></td></tr></table></figure></li>
+<li>程序编译时指定 RPATH 参数。（使用cmake） <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_SKIP_RPATH <span class="keyword">FALSE</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_WITH_INSTALL_RPATH <span class="keyword">TRUE</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_INSTALL_RPATH <span class="string">&quot;$ORIGIN/../lib&quot;</span> <span class="string">&quot;$ORIGIN/../lib&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>设置编译参数使<code>lib</code>的链接器代替系统默认链接器。（使用cmake） <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS <span class="string">&quot;-Wl,-dynamic-linker=../lib/ld-linux-x86-64.so.2&quot;</span>)</span><br></pre></td></tr></table></figure>
+ 可以使用<code>readelf -l</code>命令查看程序寻找哪个链接器，判断参数是否成功设置。</li>
+</ol>
+<p>此时存放在<code>build</code>目录下的主程序就可以正确链接<code>lib/</code>目录下面的动态库了。</p>
+<p>最后一个小问题，如果使用相对路径寻找链接器，那么程序将只能在当前工作目录正常运行，在其他目录执行就会报“无法执行：找不到需要的文件”的错误。这时，我们可以先将主程序重命名，然后相同目录创建一个与主程序原名相同的脚本，在脚本打开后，它会将工作目录切换到主程序所在位置，然后再运行主程序（Linux 平台的 Wolfram Mathematica 使用了类似的做法）。</p>
+<p>举例来说，将下面的脚本改名为 main，并赋予执行权限，同时将程序改名为 main.exec。这样无论在那个目录都可以正常打开程序。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">EXECUTABLE_NAME=<span class="string">&quot;main.exec&quot;</span></span><br><span class="line">SCRIPT_REALPATH=$(<span class="built_in">realpath</span> <span class="variable">$0</span>)</span><br><span class="line">SCRIPT_DIRPATH=$(<span class="built_in">dirname</span> <span class="variable">$SCRIPT_REALPATH</span>)</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;SCRIPT_DIRPATH&#125;</span></span><br><span class="line"><span class="built_in">exec</span> ./<span class="variable">$&#123;EXECUTABLE_NAME&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="权宜之计：直接在-Debian12-环境下编译的省心方案"><a href="#权宜之计：直接在-Debian12-环境下编译的省心方案" class="headerlink" title="权宜之计：直接在 Debian12 环境下编译的省心方案"></a>权宜之计：直接在 Debian12 环境下编译的省心方案</h3><p>如果上述的操作方法实现起来过于麻烦，那可以使用另一个路子。如果你有操作系统的镜像，那可以直接在现有环境下创建一个虚拟机模拟目标机，然后使用虚拟机里的编译产物。如果选择了这类办法，使用目前应用广泛的 docker 技术更为经济，开销更小。在制作好 docker 镜像并创建容器后，将待编译的源文件映射到容器中，输入命令编译即可。</p>
+<p>在拥有镜像（取名为<code>debian12_env:bookworm</code>）的情况下，使用 docker 的方法如下：</p>
+<ol>
+<li><p>创建docker容器</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> docker create --name debian12_wxwidgets_compiler \</span><br><span class="line">-dit -v /home/username/app:/home/username/app debian12_env:bookworm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果创建后立即运行，使用下面的命令</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> docker run --name debian12_wxwidgets_compiler \</span><br><span class="line">-dit -v /home/username/app:/home/username/app debian12_env:bookworm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动docker容器</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> docker start debian12_wxwidgets_compiler</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行docker环境下的编译过程</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 这一步是为了在容器创建一个与当前用户相同的用户，以解决编译产物归属问题</span></span><br><span class="line"><span class="built_in">sudo</span> docker <span class="built_in">exec</span> debian12_wxwidgets_compiler /bin/bash -c \</span><br><span class="line"><span class="string">&quot;groupadd username&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> docker <span class="built_in">exec</span> debian12_wxwidgets_compiler /bin/bash -c \</span><br><span class="line"><span class="string">&quot;useradd -m username -g username&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> docker <span class="built_in">exec</span> debian12_wxwidgets_compiler /bin/bash -c \</span><br><span class="line"><span class="string">&quot;cd /home/username/develop/AcData/build &amp;&amp; cmake .. &amp;&amp; make&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这一步是为了在容器创建一个与当前用户相同的用户，以解决编译产物归属问题</span></span><br><span class="line"><span class="built_in">sudo</span> docker <span class="built_in">exec</span> debian12_wxwidgets_compiler /bin/bash -c \</span><br><span class="line"><span class="string">&quot;chgrp -R username . &amp;&amp; chown -R username .&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> docker <span class="built_in">exec</span> debian12_wxwidgets_compiler /bin/bash -c <span class="string">&quot;exit&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第五步：编译过程结束后，手动退出容器</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> docker stop debian12_wxwidgets_compiler</span><br></pre></td></tr></table></figure></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://redleaves699.github.io">Redleaves699</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://redleaves699.github.io/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/">https://redleaves699.github.io/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://redleaves699.github.io" target="_blank">Redleaves699's Knowlegde Base</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/Glibc/">Glibc</a><a class="post-meta__tags" href="/tags/Release/">Release</a></div><div class="post-share"><div class="social-share" data-image="/assets/site/avatar.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/01/Sharp%20Tools/Docker%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="Docker简介及基础使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Docker简介及基础使用</div></div><div class="info-2"><div class="info-item-1">1. 学习 docker 的动机从事计算机相关行业，久闻 docker 大名，总想学习了解一下。然而，我每次上网搜索，都找不到什么平易近人的教程，要么默认你什么都掌握，要么就是讲一些概念上的东西，不贴近实际使用场景。因为工作中不常用，所以也就失去了学习的兴趣。 尽管如此，上周在软件部署时出现的问题还是让我的学习热情死灰复燃了。当时的我看到链接器那令人畏惧的报错后，第一时间的想法不是勇敢面对，而是掉头就跑——既然开发主机升级系统之前编译软件都没有问题，那就用一个和目标机器配置相同的虚拟机编译程序好了。正当我准备打开 qemu 安装系统时，docker这个词在我的脑海中浮现了。在我的印象中，它好像也有类似虚拟机的作用，而且比虚拟机的性能更好，为什么不尝试一下呢？正好趁此机会彻底把它弄明白。 由于本人使用场景有限，频率不高，所以本文只是简要介绍常用操作，不会过于深入。 2. Docker 是什么在官方资料中，这个问题已有解释，但我想在这里表达我自己的观点：docker 是一款模拟操作系统的软件。它不模拟硬件，而是如同一般应用程序一样直接使用主机本身的硬件。它利用了 Linux 内核的隔...</div></div></div></a><a class="pagination-related" href="/2025/10/21/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/new%20blog/" title="关于博客重构"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">关于博客重构</div></div><div class="info-2"><div class="info-item-1">一、重构计划的产生2025年春天，我就已经有重构老博客的打算。重构的原因有很多。第一，旧博客使用的模板并不是原生的，而是我根据使用需求改动过的，随着使用强度的提高，暴露的问题越来越多，数学公式的 bug，markdown 显示与排版的问题逐渐体现出来，此外，随着文档的增多，加载速度也成了一大问题。第二，旧博客的很多内容是我大学时期的课程作业，以及对一些概念粗浅的理解，需要的大量的纠正甚至是重写。第三，旧博客的布局我不太喜欢了，不是很主流，且文章的分类归档搜索功能也不是很强大，与我现在建设博客的概念相悖。 二、本次重构的特点本次重构具有如下特点： 1. 文章标签——提炼主旨，凸显特点文档的标签是索引相关文章的重要属性。原来老博客的标签太多，很多标签名称不同，但意义相同，有些博客主题都是C语言，但在不同文档中，有的标签中标注“C”，有的标注“C语言”。有些标签分割不细致，相互之间有包含关系，如已有“编程语言”标签，文档中还有“C语言”，“Python语言”等标签。这些问题导致标签大量冗余，影响博客检索效率和博客性能。针对这些问题，在新博客中设定标签时，要尽可能复用已存在的标签，需要新...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/07/23/Linux/Debian%20Linux%20%E7%B3%BB%E7%BB%9F%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/" title="Linux 系统的桌面环境简介"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-23</div><div class="info-item-2">Linux 系统的桌面环境简介</div></div><div class="info-2"><div class="info-item-1">已经使用当前的 Debian Linux 作为主力机两年了，一直都在用 Debian 的 KDE 桌面环境。开箱即用的环境，与 Windows 差不多的使用体验，几乎没有的使用门槛，以至于两年来并没有好好研究过桌面环境是如何实现的。最近，因为业务需要，我需要将一个在X86 Linux平台wxWidgets编写的程序移植到ARM Linux平台上，于是开始学习 Linux 桌面环境的细节。 图形是如何显示在屏幕上的（基于 X11）随着计算机技术的不断发展，单纯的命令行终端已经不能满足人们的使用需要。我们需要计算机帮助我们进行视频处理、图像处理、印刷排版、3D制图的功能。为了满足这些需求，用户图形接口(GUI)应运而生。 Linux 用户图形接口的基础是一个名为 X Windows System 的软件。为什么图形窗口要被称为 X 呢？是因为在英文字母表中，X 在 W 的后面，蕴含“这是下一代用户图形接口”的意思[^1]。 下面进入正题：X Windows System 分为服务端（X Server）、客户端（X Client）、窗口管理器（Windows Manager）、登录管理...</div></div></div></a><a class="pagination-related" href="/2021/10/12/Linux/Debian%20Linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" title="Debian Linux的使用技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-12</div><div class="info-item-2">Debian Linux的使用技巧</div></div><div class="info-2"><div class="info-item-1">Linux(Debian)镜像站，代理站 VSCode : https://vscode.cdn.azure.cn/  开机时识别双系统Win1012cd /etc/defaultsudo update-grub 此时会报警告Warning: os-prober will not be executed to detect other bootable partitions.，根据此警告，我们进入配置文件/etc/default/grub中，将其中GRUB_DISABLE_OS_PROBER=false一句取消注释，然后重新运行sudo update-grub命令，即可成功探测出Windows系统的引导程序。 用于按磁盘块复制文件的dd命令使用 dd 命令复制操作系统镜像到磁盘上。 if, of 指定输入输出文件，bs指定输入输出块大小。 1sudo dd if=system.img of=/dev/sda bs=1M status=progress  注意dd命令的块大小不要设置的过大以至于超出介质的读写速度。status选项用来显示进度，只在GNU版本的dd上有效。 从磁盘拷...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Redleaves699</div><div class="author-info-description">千里之行，始于足下</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/redleaves699"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/redleaves699" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:Algorithm_sort@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%87%E4%BA%8B%E4%BF%B1%E5%A4%87%EF%BC%9A%E8%BD%AF%E4%BB%B6%E5%9C%A8%E7%9B%AE%E6%A0%87%E6%9C%BA%E4%B8%8A%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F"><span class="toc-number">1.</span> <span class="toc-text">万事俱备：软件在目标机上运行成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%8B%E4%B8%8B%E9%9A%90%E6%82%A3%EF%BC%9A%E5%B0%86%E5%BC%80%E5%8F%91%E4%B8%BB%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%94%B1-Debian12-%E5%8D%87%E7%BA%A7%E4%B8%BA-Debian13"><span class="toc-number">2.</span> <span class="toc-text">埋下隐患：将开发主机系统由 Debian12 升级为 Debian13</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%B8%8E%E6%84%BF%E8%BF%9D%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A5%BD%E7%9A%84%E7%A8%8B%E5%BA%8F%E4%B8%8D%E8%83%BD%E8%BF%90%E8%A1%8C%E4%BA%86%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">事与愿违：为什么好好的程序不能运行了？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%85%A5%E4%B8%BA%E4%B8%BB%EF%BC%9A%E6%8F%90%E5%87%BA%E4%B8%80%E7%A7%8D%E5%8F%AF%E8%A1%8C%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E2%80%94%E2%80%94Linux-%E8%BD%AF%E4%BB%B6%E6%89%93%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">先入为主：提出一种可行的解决方案——Linux 软件打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%EF%BC%9ALinux-%E8%BD%AF%E4%BB%B6%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE%E5%8A%A8%E6%80%81%E5%BA%93%E5%8F%8A%E6%AD%A3%E7%A1%AE%E6%89%93%E5%8C%85%E6%96%B9%E6%A1%88"><span class="toc-number">5.</span> <span class="toc-text">追根溯源：Linux 软件如何寻找动态库及正确打包方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E5%AE%9C%E4%B9%8B%E8%AE%A1%EF%BC%9A%E7%9B%B4%E6%8E%A5%E5%9C%A8-Debian12-%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9A%84%E7%9C%81%E5%BF%83%E6%96%B9%E6%A1%88"><span class="toc-number">6.</span> <span class="toc-text">权宜之计：直接在 Debian12 环境下编译的省心方案</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用"><img src="/assets/sharptools/git-1.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git的使用"/></a><div class="content"><a class="title" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用">Git的使用</a><time datetime="2026-01-20T09:10:35.000Z" title="发表于 2026-01-20 17:10:35">2026-01-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"><img src="/assets/cover/20260110101733.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"/></a><div class="content"><a class="title" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发">在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发</a><time datetime="2026-01-10T02:17:33.000Z" title="发表于 2026-01-10 10:17:33">2026-01-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/12/18/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/%E6%82%AC%E8%80%8C%E6%9C%AA%E5%86%B3%E4%B9%8B%E9%97%AE/" title="暂时不能解决的问题">暂时不能解决的问题</a><time datetime="2025-12-18T07:31:00.000Z" title="发表于 2025-12-18 15:31:00">2025-12-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/01/Sharp%20Tools/Docker%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="Docker简介及基础使用">Docker简介及基础使用</a><time datetime="2025-11-01T12:45:40.000Z" title="发表于 2025-11-01 20:45:40">2025-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/" title="实践中理解 Linux 软件依赖机制和打包方法">实践中理解 Linux 软件依赖机制和打包方法</a><time datetime="2025-10-25T06:46:15.000Z" title="发表于 2025-10-25 14:46:15">2025-10-25</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2021 - 2026 By Redleaves699</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.0.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div><div class="footer_custom_text">Thanks for your reading.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>

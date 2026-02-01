@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Redleaves699's Knowlegde Base - Set Sail!</title><meta name="author" content="Redleaves699"><meta name="copyright" content="Redleaves699"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="千里之行，始于足下">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Redleaves699&#39;s Knowlegde Base">
+<meta property="og:url" content="https://redleaves699.github.io/page/3/index.html">
+<meta property="og:site_name" content="Redleaves699&#39;s Knowlegde Base">
+<meta property="og:description" content="千里之行，始于足下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://redleaves699.github.io/assets/site/avatar.jpg">
+<meta property="article:author" content="Redleaves699">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redleaves699.github.io/assets/site/avatar.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/assets/site/sign2.svg"><link rel="canonical" href="https://redleaves699.github.io/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redleaves699\'s Knowlegde Base',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 所有文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-tools"></i><span> 在线工具</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/assets/site/library.svg" alt="Logo"><span class="site-name">Redleaves699's Knowlegde Base</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 所有文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-tools"></i><span> 在线工具</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Redleaves699's Knowlegde Base</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/redleaves699" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:Algorithm_sort@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/14/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" title="非对称加密简介">非对称加密简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-14T05:05:00.000Z" title="发表于 2024-04-14 13:05:00">2024-04-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a></span></div><div class="content">非对称加密算法的出现对称加密解密一般需要双方确定一个或一组共同的密钥。但这种方式存在漏洞。在确定密钥的过程中，双方需要通信，但通信双方不能保障信道安全性。此时，攻击者可以窃听通信信道从而获取双方商议的密钥。这种如何保证密钥传输保密性的问题被称为密钥配送问题。非对称加密是解决该问题的一种思想。 非对称加密，就是通过在信道中传递公开的密钥从而绕过密钥配送问题的思想。非对称加密双方各保存一对公钥(Public Key)和私钥(Private Key)。发送方给接收方发送信息时，使用接收方的公钥将该信息加密后传给接收方。接收方受到加密信息后，使用自己的私钥解密信息。完成一次信息传递。非对称加密的加解密运算是可逆的。  $$ Msg_{encrypted}=f(msg, \text{ReceiverPub}) \\ msg=f(Msg_{encrypted}, \text{ReceiverPri}) $$  代表性算法特点：正向计算容易，逆向计算（未知密钥的情况）困难 算法：RSA, ECC, EI Gamal, Knapsack 安全问题针对算法的暴力破解算法经过了精心设计，但原理公开，...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/05/%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E7%96%91%E9%9A%BE%E9%97%AE%E9%A2%98/" title="C语言答疑">C语言答疑</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-05T11:49:47.000Z" title="发表于 2023-12-05 19:49:47">2023-12-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="content">1.C语言关键字1.1 关键字static 在函数体内 ，一个被声明为静态的变量 在这一函数被调用过程中维持其值不变。 在文件域内（但在函数体外），一个被声明为静态的变量 可以被文件域内所有函数访问，但不能被文件域外其它函数访问。它是一个本地的全局变量。 在文件域内 ，一个被声明为静态的函数只可被这一文件域内的其它函数调用。那就是，这个函数被限制在声明它的文件的本地范围内使用。  1.2 关键字const只读 ：不能简单说 “常数”使用关键字 const 能产生更紧凑的代码。使编译器保护那些不希望被改变的参数，防止其被无意的代码修改。最简单读懂const变量类型的方法，就是直接从右向左阅读。以const int *a为例，*a表示a是指针，int *a表示指针a指向整形，const int *a表示指针a指向常整形。 1234const int a; // a 是整数，a 是常量                       ---&gt;  a 是一个常整数int const a; //  a 是常量，a 是整数                      ---&gt;  a 是...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/12/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/handwrite/" title="学学写字">学学写字</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-12T15:13:47.000Z" title="发表于 2023-04-12 23:13:47">2023-04-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/">感想随笔</a></span></div><div class="content">如何写粗体字母  如何写希腊字母  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/05/Sharp%20Tools/Anaconda%E6%93%8D%E4%BD%9C%E9%80%9F%E6%9F%A5/" title="Anaconda Python工具的使用">Anaconda Python工具的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-05T11:49:47.000Z" title="发表于 2023-02-05 19:49:47">2023-02-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></span></div><div class="content">1. 更换conda软件源1.1  显示conda的json配置文件1conda config --show  1.2  添加镜像源123conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --set show_channel_urls yes  运行conda clean -i清除索引缓存，保证用的是镜像站提供的索引。 1.3 恢复默认镜像源删除单个链接 1conda config --remove channels &lt;your_url&gt;  恢复默认镜像源 1conda config --remove-key channels  2. 配置虚拟环境2.1 什么是虚拟环境2.2 新建虚拟环境的方法1234查看所有虚拟环境： conda info -e 启动虚拟环境...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/06/20/%E7%AE%97%E6%B3%95/%E5%B9%B3%E9%9D%A2%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9/" title="平面最近点对 POJ-3714 Raid">平面最近点对 POJ-3714 Raid</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-06-20T07:20:30.000Z" title="发表于 2022-06-20 15:20:30">2022-06-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">算法题解</a></span></div><div class="content">题目描述给定$n(n \leq 100000)$个标记为$s$的点$(xs_{i},ys_{i})$和$n$个标记为$a$的点$(xa_{i},ya_{i})$，求两种点之间的最小距离。 解题思路这道题很像平面最近点对，不同点仅仅是本题中的点上是有标签的，所以仍然考虑平面最近点对用到的分治法。 下面的图片是一个平面最近点对问题的图示。用分治法解决此问题的总体思想，就是先求出黑色直线左右两端点集的最近点对，然后在对结果进行合并，之所以要合并，是因为最近的点对中的两个点可能一个在左侧集合，一个在右侧集合。 既然我们已经求出了左右两端的最近点对的距离（$d_1,d_2$，以及$d &#x3D; \min(d_1,d_2)$，本例中$d&#x3D;1$），我们当然要充分利用这个已知信息，从而排除不可能的点对，减少枚举的数量。在图中，我们选定的中心分割点是$V$点（它在之前被划分到左侧子问题）。 如果左右两侧的点的连线长度小于$d$，那么就意味着这两个点一定被包含在一个圆中，这个圆满足圆心在黑色直线上，且半径为$d$。而这些圆包络的面积，就是一个以分割点横坐标$V_x$为中心，宽度为$2d...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/06/18/%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java%E9%AB%98%E9%80%9F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" title="Java高速输入输出">Java高速输入输出</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-06-18T01:15:35.000Z" title="发表于 2022-06-18 09:15:35">2022-06-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java%E8%AF%AD%E8%A8%80/">Java语言</a></span></div><div class="content">Scanner类的问题对于一般情况来说，java.util.scanner类可以解决输入的大部分需求。那么，这个类是如何解决输入格式化问题的？答案是使用正则表达式匹配。正则表达式的解析速度是有瓶颈的，使用正则表达式，虽然可以尽可能保证输入数据的合法性，但会严重影响输入的性能。尤其是面对大数据时。所以，有没有一种办法，既不用手写输入函数，又可以提高输入的速度呢？答案当然是肯定的。 Java Stream Tokenizer类实现快速输入使用示例 使用的输入文本如下： 12345python之字符串阅读 293python基础知识（一）：入门必备阅读 574JS中ArrayBuffer、Uint8Array、Blob与文本字符之间的相互转换  使用方法如下，注意使用StreamTokenizer的函数要增加一个throws IOException。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/28/Sharp%20Tools/%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E5%85%B7curl/" title="命令行实现的浏览器——curl">命令行实现的浏览器——curl</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-28T08:25:15.000Z" title="发表于 2022-04-28 16:25:15">2022-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></span></div><div class="content">一，发送请求下载单个文件，默认将输出打印到标准输出中(STDOUT)中 1curl www.baidu.com  二，下载文件Windows PowerShell中自带的curl实际上是Invoke-WebRequest的软链接，并不是像Linux一样的curl。如果想安装curl，需要先下载curl for windows。输入以下命令即可。 1curl -o curl-7.83.0-win64-mingw.zip https://curl.se/windows/dl-7.83.0/curl-7.83.0-win64-mingw.zip  之后配置环境变量，然后使用下面的命令删除软链接（或将所有的curl替换为curl.exe）： 1del Alias:\curl  此时执行curl（如果不删除软链接，则应执行curl.exe），如果输出如下，说明已经配置好了： 1curl: try &#x27;curl --help&#x27; for more information  为了不让命令特别长，也为了更直观的显示各种命令的作用，下面的命令是换行展示的，在实际使用中应该全部使用空...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/12/%E7%AE%97%E6%B3%95/%E9%A9%AC%E7%9A%84%E5%91%A8%E6%B8%B8/" title="马的周游问题(knight move circuit)">马的周游问题(knight move circuit)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-12T01:56:00.000Z" title="发表于 2022-04-12 09:56:00">2022-04-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">算法题解</a></span></div><div class="content">题目描述给定一个$n$行$m$列的棋盘，任意给出一个马的周游路线。周游路线是指从起始点开始，不重不漏的经过棋盘上的每一个格子，最后再回到起始点的路线。 样例输入16 5  样例输出123456 2   25   22   13    423   12    3   30   2126    1   24    5   1411   16    9   20   29 8   27   18   15    617   10    7   28   19  解答本题是一个哈密顿路问题，正常来说，哈密顿问题是一个NP完全问题。不过，由马的周游问题的特殊性，我们可以通过将问题分解为子问题的方式。 周游问题的特殊性见下图。  从图中可以看到，我们将问题分解后，得到的子问题的解法大致相同，而且两个子问题很容易合并。 子问题合并子问题合并的规则如下。令$p_1, p_2\in E$，$p_1’,p_2’ \in E’$：  $p_1, p_2$之间，$p_1’,p_2’$之间都有无向边连接。 $p_1, p’_1$和$p_2,p_2’$可达，或$p_1, p’_2$和$p_1’, p_2$可...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/10/%E7%AE%97%E6%B3%95/%E6%B1%82%E8%A7%A3%E5%A4%9A%E6%9C%BA%E8%B0%83%E5%BA%A6/" title="求解多机调度问题">求解多机调度问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-10T14:15:08.000Z" title="发表于 2022-04-10 22:15:08">2022-04-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">算法题解</a></span></div><div class="content">题目描述给定$n$台相同的机器：$P_j, 1≤j≤n$,及$m$个作业：$J_i, 1≤i≤m, J_i$需时间$t_i$, 每台机器一次只能执行一个作业，如何分配任务才能尽快完成所有作业？ 换一种说法，将一个作业集划分为不相交的子集${S_1, S_2,…, S_m}$，使得下面的式子成立：$$\underset{{S_1,S_2,\dots,S_m}}\min {\underset{1\leq j\leq m}\max\underset{k\in S_j}\sum t_k}$$ 分析多机调度问题是典型的NP完全问题。如果$m$的值比较小，可以使用动态规划。但是$m$值太大，需要的空间就会成指数式的增长。例如下面的双机调度问题，就可以使用（伪）多项式复杂度求解。 双机调度即本题中$m&#x3D;2$的情形。设$F[i][j][k]$为前$i$个任务已经调度完成，0号机的负载为$j$，1号机的负载为$k$时的最优调度时间，我们很容易得到：$$F[i][j][k]&#x3D;\min{F[i-1][j-t_i][k],F[i-1][j][k-t_i]}+t_i$$最终答案为$\u...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/02/28/%E7%AE%97%E6%B3%95/%E6%95%B4%E6%95%B0%E5%88%92%E5%88%86%E9%97%AE%E9%A2%98/" title="整数划分问题">整数划分问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-28T07:13:47.000Z" title="发表于 2022-02-28 15:13:47">2022-02-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/">算法题解</a></span></div><div class="content">题目大意两种描述 给定$n\in\mathbb{Z}^+$，整数$n$可以分解为$\stackrel{K}{\underset{k&#x3D;1}\sum}n_k$的形式，求不同的分解有多少种。（例如6&#x3D;3+2+1与6&#x3D;2+3+1与6&#x3D;1+2+3是同一种分解）  给定$n\in\mathbb{Z}^+$，整数$n$可以分解为$\stackrel{K}{\underset{k&#x3D;1}\sum}n_k$（其中$n_1\geq n_2\geq \cdots \geq n_K$）的形式，求这样的分解有多少种。   例如6的分解有11种，分别如下： 12345665+14+2,4+1+13+3,3+2+1,3+1+1+12+2+2, 2+2+1+1, 2+1+1+1+11+1+1+1+1+1  解决方法因为加数的排列不影响结果，所以问题一和问题二是等价的，其中问题二确定了分解出的加数的大小关系，这会降低问题的难度。所以围绕问题二求解。 引入辅助变量$m$，意义是分解结果中最大的加数，引入目的是用来限定分解后加数的排列顺序。定义$f(n,m)$表示将$n...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Redleaves699</div><div class="author-info-description">千里之行，始于足下</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/redleaves699"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/redleaves699" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:Algorithm_sort@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用"><img src="/assets/sharptools/git-1.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git的使用"/></a><div class="content"><a class="title" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用">Git的使用</a><time datetime="2026-01-20T09:10:35.000Z" title="发表于 2026-01-20 17:10:35">2026-01-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"><img src="/assets/cover/20260110101733.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"/></a><div class="content"><a class="title" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发">在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发</a><time datetime="2026-01-10T02:17:33.000Z" title="发表于 2026-01-10 10:17:33">2026-01-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/12/18/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/%E6%82%AC%E8%80%8C%E6%9C%AA%E5%86%B3%E4%B9%8B%E9%97%AE/" title="暂时不能解决的问题">暂时不能解决的问题</a><time datetime="2025-12-18T07:31:00.000Z" title="发表于 2025-12-18 15:31:00">2025-12-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/01/Sharp%20Tools/Docker%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="Docker简介及基础使用">Docker简介及基础使用</a><time datetime="2025-11-01T12:45:40.000Z" title="发表于 2025-11-01 20:45:40">2025-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/" title="实践中理解 Linux 软件依赖机制和打包方法">实践中理解 Linux 软件依赖机制和打包方法</a><time datetime="2025-10-25T06:46:15.000Z" title="发表于 2025-10-25 14:46:15">2025-10-25</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C-%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">C++语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">C语言</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">Java语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">Python语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Verilog%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">Verilog语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/awk%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">awk语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><span class="card-category-list-name">前端开发</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="card-category-list-name">密码学</span><span class="card-category-list-count">2</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/C/" style="font-size: 1.33em; color: rgb(192, 140, 50);">C</a><a href="/tags/arm/" style="font-size: 1.15em; color: rgb(50, 156, 50);">arm</a><a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/" style="font-size: 1.21em; color: rgb(50, 50, 158);">交叉编译</a><a href="/tags/SoC/" style="font-size: 1.21em; color: rgb(50, 192, 182);">SoC</a><a href="/tags/RISC-V/" style="font-size: 1.15em; color: rgb(80, 188, 108);">RISC-V</a><a href="/tags/Linux/" style="font-size: 1.27em; color: rgb(157, 182, 136);">Linux</a><a href="/tags/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/" style="font-size: 1.21em; color: rgb(128, 115, 100);">桌面环境</a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.15em; color: rgb(179, 50, 181);">命令行</a><a href="/tags/bash/" style="font-size: 1.21em; color: rgb(50, 184, 139);">bash</a><a href="/tags/Glibc/" style="font-size: 1.15em; color: rgb(97, 101, 144);">Glibc</a><a href="/tags/Release/" style="font-size: 1.15em; color: rgb(150, 50, 59);">Release</a><a href="/tags/Git/" style="font-size: 1.27em; color: rgb(192, 134, 159);">Git</a><a href="/tags/GitHub/" style="font-size: 1.15em; color: rgb(106, 116, 58);">GitHub</a><a href="/tags/Anaconda/" style="font-size: 1.15em; color: rgb(69, 178, 50);">Anaconda</a><a href="/tags/Python/" style="font-size: 1.21em; color: rgb(95, 114, 75);">Python</a><a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 1.45em; color: rgb(194, 50, 50);">开发工具</a><a href="/tags/docker/" style="font-size: 1.15em; color: rgb(180, 116, 185);">docker</a><a href="/tags/%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/" style="font-size: 1.15em; color: rgb(89, 63, 185);">部署工具</a><a href="/tags/markdown/" style="font-size: 1.15em; color: rgb(63, 50, 180);">markdown</a><a href="/tags/%E6%96%87%E6%A1%A3%E5%B7%A5%E5%85%B7/" style="font-size: 1.15em; color: rgb(59, 94, 92);">文档工具</a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.15em; color: rgb(147, 184, 124);">数据库</a><a href="/tags/gdb/" style="font-size: 1.15em; color: rgb(191, 181, 181);">gdb</a><a href="/tags/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 1.15em; color: rgb(50, 50, 164);">调试工具</a><a href="/tags/Educoder%E5%AE%9E%E8%AE%AD/" style="font-size: 1.15em; color: rgb(74, 50, 50);">Educoder实训</a><a href="/tags/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/" style="font-size: 1.15em; color: rgb(50, 73, 69);">逆向分析</a><a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 1.21em; color: rgb(171, 61, 107);">密码学</a><a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 1.21em; color: rgb(141, 50, 160);">信息安全</a><a href="/tags/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" style="font-size: 1.21em; color: rgb(176, 50, 103);">非对称加密</a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.21em; color: rgb(50, 50, 159);">前端</a><a href="/tags/%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9/" style="font-size: 1.15em; color: rgb(148, 109, 50);">网页内容</a><a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 1.15em; color: rgb(135, 60, 50);">运维</a><a href="/tags/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" style="font-size: 1.15em; color: rgb(167, 196, 50);">英语学习</a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.21em; color: rgb(188, 167, 174);">生活</a><a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.21em; color: rgb(142, 50, 64);">随笔</a><a href="/tags/%E6%8F%90%E9%97%AE/" style="font-size: 1.15em; color: rgb(141, 157, 120);">提问</a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.15em; color: rgb(172, 82, 189);">数学</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.39em; color: rgb(69, 77, 124);">算法</a><a href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/" style="font-size: 1.21em; color: rgb(76, 161, 50);">分治法</a><a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 1.15em; color: rgb(50, 155, 50);">递归</a><a href="/tags/%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96/" style="font-size: 1.15em; color: rgb(50, 191, 50);">算法优化</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/12/">
+            <span class="card-archive-list-date">
+              十二月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              十月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              七月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/06/">
+            <span class="card-archive-list-date">
+              六月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              五月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">43</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">56.3k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-01T08:31:01.810Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2021 - 2026 By Redleaves699</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.0.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div><div class="footer_custom_text">Thanks for your reading.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["贵有恒何必三更起五更睡，最无益只怕一日曝十日寒","长风破浪会有时，直挂云帆济沧海"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["贵有恒何必三更起五更睡，最无益只怕一日曝十日寒","长风破浪会有时，直挂云帆济沧海"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>

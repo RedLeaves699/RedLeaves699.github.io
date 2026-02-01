@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Git的使用 | Redleaves699's Knowlegde Base</title><meta name="author" content="Redleaves699"><meta name="copyright" content="Redleaves699"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git 快速上手Git 的作用与参考资料Git是一个开源的分布式版本控制系统。更多内容请参考：起步-Git-是什么深入理解Git：从原理到实践的全面指南关于HEAD代码版本控制用SVN还是Git好？- 腾讯技术工程的回答 - 知乎【GeekHour】一小时Git教程Git 模拟器 基本概念 PART1：工作区域与仓库存储 Git 如何追踪文件的变化？ 追踪新旧文件变化需要把新旧文件放在至少两个区域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git的使用">
+<meta property="og:url" content="https://redleaves699.github.io/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Redleaves699&#39;s Knowlegde Base">
+<meta property="og:description" content="Git 快速上手Git 的作用与参考资料Git是一个开源的分布式版本控制系统。更多内容请参考：起步-Git-是什么深入理解Git：从原理到实践的全面指南关于HEAD代码版本控制用SVN还是Git好？- 腾讯技术工程的回答 - 知乎【GeekHour】一小时Git教程Git 模拟器 基本概念 PART1：工作区域与仓库存储 Git 如何追踪文件的变化？ 追踪新旧文件变化需要把新旧文件放在至少两个区域">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://redleaves699.github.io/assets/sharptools/git-1.svg">
+<meta property="article:published_time" content="2026-01-20T09:10:35.000Z">
+<meta property="article:modified_time" content="2026-01-22T14:43:57.405Z">
+<meta property="article:author" content="Redleaves699">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="开发工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redleaves699.github.io/assets/sharptools/git-1.svg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Git的使用",
+  "url": "https://redleaves699.github.io/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/",
+  "image": "https://redleaves699.github.io/assets/sharptools/git-1.svg",
+  "datePublished": "2026-01-20T09:10:35.000Z",
+  "dateModified": "2026-01-22T14:43:57.405Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Redleaves699",
+      "url": "https://redleaves699.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/assets/site/sign2.svg"><link rel="canonical" href="https://redleaves699.github.io/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Git的使用',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 所有文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-tools"></i><span> 在线工具</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/assets/sharptools/git-1.svg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/assets/site/library.svg" alt="Logo"><span class="site-name">Redleaves699's Knowlegde Base</span></a><a class="nav-page-title" href="/"><span class="site-name">Git的使用</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 所有文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-tools"></i><span> 在线工具</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Git的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-20T09:10:35.000Z" title="发表于 2026-01-20 17:10:35">2026-01-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-22T14:43:57.405Z" title="更新于 2026-01-22 22:43:57">2026-01-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="Git-快速上手"><a href="#Git-快速上手" class="headerlink" title="Git 快速上手"></a>Git 快速上手</h2><h3 id="Git-的作用与参考资料"><a href="#Git-的作用与参考资料" class="headerlink" title="Git 的作用与参考资料"></a>Git 的作用与参考资料</h3><p>Git是一个开源的分布式版本控制系统。<br>更多内容请参考：<br><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F">起步-Git-是什么</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/potatso/p/18644042">深入理解Git：从原理到实践的全面指南</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yingchi/p/18754048">关于HEAD</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/25491925/answer/2471516234">代码版本控制用SVN还是Git好？- 腾讯技术工程的回答 - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1HM411377j/">【GeekHour】一小时Git教程</a><br><a target="_blank" rel="noopener" href="https://learngitbranching.js.org/">Git 模拟器</a></p>
+<h3 id="基本概念-PART1：工作区域与仓库存储"><a href="#基本概念-PART1：工作区域与仓库存储" class="headerlink" title="基本概念 PART1：工作区域与仓库存储"></a>基本概念 PART1：工作区域与仓库存储</h3><ol>
+<li><p>Git 如何追踪文件的变化？<br> 追踪新旧文件变化需要把新旧文件放在至少两个区域做对比。如果需要追踪新文件与任意历史时期文件的变动，那还需要一个存储任意时期历史文件的区域。遵循这个逻辑，Git 设计了三个区域：工作区，暂存区（stage）和仓库区。</p>
+<ul>
+<li><strong>工作区</strong>就是我们编辑文件的区域，是电脑中实际的目录。这里的文件会被用户随时修改，永远是最新的。</li>
+<li><strong>暂存区</strong>（又称索引，index）是由 git 管理的，存放旧文件的区域。git 在对比暂存区和工作区的内容后，告知用户文件有那些变动。</li>
+<li><strong>仓库区</strong>是由 git 管理的，存放历史文件的区域。这个仓库使得 git 可以追踪新文件与任意历史时期文件（以下均称作历史版本），以及任意两个历史版本之间的变动。分为本地仓库和远程仓库。</li>
+</ul>
+<p> 处在不同区域的同名文件，可以用以下几种状态描述：</p>
+<ul>
+<li><strong>未跟踪</strong>状态。该文件出现在工作区，但未出现在暂存区。Git 无法跟踪对比新旧文件的差异，因为用作对比标准的旧文件不存在。</li>
+<li><strong>未修改</strong>状态。该文件出现在工作区和暂存区，且工作区与暂存区无差异。</li>
+<li><strong>已修改</strong>状态。该文件出现在工作区和暂存区，且工作区内容相对于暂存区内容有更新。注意，在工作区删除暂存区存在的同名文件也是一种修改。</li>
+<li><strong>已暂存</strong>（staged）状态。工作区最新的修改已经保存到暂存区的状态。</li>
+</ul>
+</li>
+<li><p>Git 仓库区的作用<br> Git 仓库区分为本地仓库和远程仓库。它们的功能是相同的，存储文件的全部历史版本。使用 Git，我们可以轻易把仓库中的文件恢复到工作区或暂存区。</p>
+</li>
+<li><p>“三区域四状态”之间通过 Git 操作的转化关系图。<br> 上述的“三区域四状态”可以通过常用的 Git 命令联系起来。<br> <img src="/assets/sharptools/git-1.svg" alt="“三区域四状态”的转换"></p>
+<blockquote>
+<p>补充说明：图中工作区内的一些未跟踪文件在使用<code>git add</code>命令加入暂存区后，将同时拥有两个状态：未修改和已暂存。其中已暂存的状态在<code>git commit</code>之后会转化为未修改。此时这些文件就只有未修改一种状态了。</p>
+</blockquote>
+</li>
+<li><p>Git 相关操作命令<br> <code>git init</code>：将当前目录，以及所有子目录下的文件交由git管理。目录下会生成 .git 目录存储管理所需的必要信息。<br> <code>git log</code>：查看历史提交记录。每次提交会将当前的暂存区文件存储到本地仓库区，并形成一条提交记录。<br> <code>git add .</code>：将目录下所有文件加入暂存区。<br> <code>git rm</code>：将指定文件移出<strong>工作区</strong>和<strong>暂存区</strong>。<code>git rm --cached</code>将指定文件移出<strong>暂存区</strong>。<br> <code>git commit</code>：将暂存区所有文件提交到本地仓库区。<br> <code>git reset</code>：将工作区恢复到某个状态。有三个选项，对应不同的恢复程度（即是否保留工作区或暂存区的修改）。不指定参数，默认使用<code>--mixed</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">保留当前工作区修改</th>
+<th align="center">保留当前缓存区修改</th>
+<th align="center">使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">–soft</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">合并多次提交</td>
+</tr>
+<tr>
+<td align="center">–hard</td>
+<td align="center">❎</td>
+<td align="center">❎</td>
+<td align="center">完全恢复到某个历史状态</td>
+</tr>
+<tr>
+<td align="center">–mixed</td>
+<td align="center">✅</td>
+<td align="center">❎</td>
+<td align="center">合并多次提交</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>PS：如何使用 reset 合并多次提交的问题将在分支与历史版本管理主题解释。</p>
+</blockquote>
+<p> <code>git diff</code>：对比工作区和暂存区。不仅如此，可以使用<code>--cached/--staged</code>选项对比暂存区和仓库最新一次提交，在<code>diff</code>后加<code>HEAD</code>参数对比工作区和仓库（当前分支下）最新一次提交，在<code>diff</code>后加仓库中两次提交的ID对比两次提交。<br> <code>git push</code>：向远程仓库推送本地仓库提交记录<br> <code>git pull/git clone</code>：从远程仓库获取提交记录</p>
+</li>
+</ol>
+<h3 id="基本概念-PART2：仓库分支与历史版本管理"><a href="#基本概念-PART2：仓库分支与历史版本管理" class="headerlink" title="基本概念 PART2：仓库分支与历史版本管理"></a>基本概念 PART2：仓库分支与历史版本管理</h3><ol>
+<li><p>分支：</p>
+<ul>
+<li>每个分支代表一条<strong>链表</strong>，这条链表由一系列提交记录构成，在一条分支上，每提交一次，分支就在其头部插入一条提交记录。</li>
+<li>每个分支都维护一个指针，这个指针表示链表的头部，指向一条提交记录（在下面的相关图片中，分支名字所在的位置就是这个指针所在的位置）。我们把这个指针指向的位置称为分支的“<strong>最新提交</strong>”。</li>
+<li>master分支（main 分支）：git 的默认分支。</li>
+</ul>
+</li>
+<li><p>HEAD 指针<br> 注意 HEAD 指向的是<strong>当前分支</strong>（这使得它可以操作分支内的数据，如链表头指针），而不是直接指向提交记录。后面出现的两张示例图体现了这一点。在操作提交记录时，使用<code>HEAD^</code>或<code>HEAD~</code>表示前一个版本，<code>HEAD^5</code>或<code>HEAD~5</code>表示前五个版本。HEAD 指针在特殊情况下也可以直接指向提交记录，此时被称作分离头指针状态。</p>
+</li>
+<li><p>分支操作</p>
+<ul>
+<li><code>git branch dev</code>：在当前提交记录创建 dev 分支。</li>
+<li><code>git switch dev</code>：切换到名为 dev 的分支（让 HEAD 指向 dev）。这是 git 2.23+引入的新功能，原有的<code>git checkout dev</code>不推荐使用了，它的语义没有这个命令明确。</li>
+<li><code>git checkout -- file</code>：从暂存区恢复<code>file</code>文件的状态。即从暂存区中取同名文件覆盖当前工作区的同名文件。<code>--</code>是一个分隔符，用来区分分支名和文件路径，以防止与把 file 认作分支产生歧义。</li>
+<li><code>git checkout commit-hash -- file</code>：将<code>file</code>恢复到 commit-hash 这次提交时的状态。</li>
+<li><code>git restore</code>：从暂存区恢复工作区的某个文件。这是 git 2.23+引入的新功能，用于替代<code>git checkout</code>命令的恢复文件功能，它的语义更加明确，用法与<code>checkout</code>略有不同。</li>
+<li><code>git checkout dev</code>：切换到名为 dev 的分支。</li>
+<li><code>git checkout commit-hash</code>：进入不在任何分支操作的分离头指针状态（detached head），若要保留更改，必须另开一个分支，或者将分离头指针状态的提交记录与某个分支合并。后一种做法的过程如下：<br> <img src="/assets/sharptools/git%20detached%20head.svg" alt="将分离头指针状态的提交记录与某个分支合并"><br> 如图所示，使用<code>git checkout C2</code>命令让 HEAD 直接指向 C2 这次提交，然后基于 C2 修改内容后，向本地仓库提交本次修改，提交记录为 C4（图中左侧）。C4 这个提交记录目前不属于任何分支。随后，将分支切换为 master，最后使用<code>git merge C4</code>合并C4与master分支的提交记录C2，最终结果如图中右侧所示。</li>
+<li><code>git merge dev</code>：合并两个分支。即合并 dev 分支指向的提交记录与当前分支 master 的提交记录。合并时可能需要手动处理一些冲突。    </li>
+<li><code>git rebase dev</code>：假设当前 HEAD 指向 master 分支，这个操作将以 dev 分支作为基础，将 master 分支最新提交与 dev 分支最新提交的最近公共祖先（LCA）节点（即图中无标签的点）以上，master 及以下的部分移至 dev 分支最新提交的上方。<br> <img src="/assets/sharptools/git%20rebase.svg" alt="git rebase 图示"></li>
+</ul>
+</li>
+<li><p>如何使用 reset 合并多次提交？<br> 假如有六个提交都修改了某个文件的其中一行，第七次修改还没有提交。此时使用 soft 或 mixed 选项回到第一次提交时的状态，回到这个状态后，第七次修改后未提交的文件仍会保留在工作区。如果我们以第一次提交为基础再提交一次，由于提交的文件包含了第二至第七次的全部修改，第二次到第七次提交的全部修改就此合并。<br> 下图是全过程（图中的<code>Helloxxx</code>表示工作区文件的内容）：<br> <img src="/assets/sharptools/git%20reset%20soft.svg" alt="reset 合并多次提交"><br> 此时，提交记录 C2-C6 将<strong>不再属于任何分支</strong>，而新生成的提交记录 C7 被纳入了 master 分支中，这样就实现了在 master 分支合并提交。而 C2-C6 自此可以手动删除，或保留以备不时之需。</p>
+</li>
+</ol>
+<h3 id="团队协作任务中的版本管理"><a href="#团队协作任务中的版本管理" class="headerlink" title="团队协作任务中的版本管理"></a>团队协作任务中的版本管理</h3><ol>
+<li>工作流模型<br> 复杂，用于大型企业，大量中等水平开发者。<br> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/707366399">Git-GitFlow工作流</a></li>
+<li>GitHub模型<br> 主要用于开源项目，适合少数高水平开发者。<br> 一个主分支与一个 dev 分支，贡献者 fork 代码，创建 dev 分支，并在修改后发起一个 pull request，由项目管理者审计代码，合并分支。</li>
+</ol>
+<h2 id="Git-使用场景参考与使用方法速查"><a href="#Git-使用场景参考与使用方法速查" class="headerlink" title="Git 使用场景参考与使用方法速查"></a>Git 使用场景参考与使用方法速查</h2><h3 id="在U盘上创建代码仓库"><a href="#在U盘上创建代码仓库" class="headerlink" title="在U盘上创建代码仓库"></a>在U盘上创建代码仓库</h3><ol>
+<li>在U盘上创建空仓库my_repo。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /media/&lt;username&gt;/&lt;usb_name&gt;/Git-USB/my_repo</span><br><span class="line">git init --bare /media/&lt;username&gt;/&lt;usb_name&gt;/Git-USB/my_repo</span><br></pre></td></tr></table></figure></li>
+<li>在本地git工程目录下执行，创建远程仓库链接 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;远程分支名&gt; /media/&lt;username&gt;/&lt;usb_name&gt;/Git-USB/my_repo</span><br></pre></td></tr></table></figure></li>
+<li>用git push&#x2F;pull 命令进行版本管理 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;远程分支名&gt; main</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>使用–bare选项创建的repository被称作bare repository，它不会包含working目录（只包含.git目录下的内容），所以不适合在上面改code。bare repository主要的作用就是被push和pull。根据GitFaq的说法：</p>
+<blockquote>
+<p>A quick rule of thumb is to never push into a repository that has a work tree attached to it, until you know what you are doing.</p>
+</blockquote>
+<h3 id="查看状态常用操作"><a href="#查看状态常用操作" class="headerlink" title="查看状态常用操作"></a>查看状态常用操作</h3><ol>
+<li><p><code>git status</code>：这是一个非常常用的命令，用于查看当前的工作树状态以及与版本控制系统之间的差异。它会显示文件的修改状态、是否有未提交的更改、是否有未跟踪的文件等信息。</p>
+</li>
+<li><p><code>git branch</code>：通过运行该命令，可以查看当前分支的列表并标记当前所在的分支。当前分支前面带有星号（*）的就是当前所在的分支。</p>
+</li>
+<li><p><code>git log</code>：该命令可用于查看提交日志。运行<code>git log</code>会显示当前分支的所有提交记录，包括提交者、提交日期和提交的摘要信息。</p>
+</li>
+<li><p><code>git reflog</code>：如果你想查看操作历史，包括分支切换、提交、重置等操作的日志，可以使用该命令。它会显示所有引用的更改历史记录。</p>
+</li>
+<li><p><code>git show</code>：这个命令可以显示提交的具体内容以及所做的更改。可以使用<code>git show HEAD</code>来查看最后一次提交的内容，或者使用<code>git show commit_id</code>来查看特定提交的内容。</p>
+</li>
+</ol>
+<h3 id="修改最近一次git-commit的message"><a href="#修改最近一次git-commit的message" class="headerlink" title="修改最近一次git commit的message"></a>修改最近一次git commit的message</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend </span><br></pre></td></tr></table></figure>
+
+<h2 id="gitignore-文件"><a href="#gitignore-文件" class="headerlink" title=".gitignore 文件"></a>.gitignore 文件</h2><h3 id="为什么需要-gitignore文件"><a href="#为什么需要-gitignore文件" class="headerlink" title="为什么需要.gitignore文件"></a>为什么需要.gitignore文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;0.1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面这两段语句十分简洁，大大方便了代码的提交。</p>
+<p>但有时，一些不必要的文件也会被提交上去。比如可执行文件，或者用户本地配置文件等。人类是懒惰的，我绝不会手动对逐个文件进行添加或删除。这该怎么办？</p>
+<p>这时，我们就需要.gitignore，它会让git我们忽略不必要的文件。</p>
+<h3 id="简单的使用"><a href="#简单的使用" class="headerlink" title="简单的使用"></a>简单的使用</h3><p>举例</p>
+<p>.gitignore支持通配符，支持忽略目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">*.class</span><br><span class="line"></span><br><span class="line"># Mobile Tools for Java (J2ME)</span><br><span class="line">.mtj.tmp/</span><br><span class="line"></span><br><span class="line"># Package Files #</span><br><span class="line">*.jar</span><br><span class="line">*.war</span><br><span class="line">*.ear</span><br><span class="line"></span><br><span class="line"># virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml</span><br><span class="line">hs_err_pid*</span><br><span class="line"></span><br><span class="line">!/foo</span><br><span class="line">/foo/*</span><br><span class="line">!/foo/bar</span><br></pre></td></tr></table></figure>
+
+<h3 id="详细的使用文档-英文"><a href="#详细的使用文档-英文" class="headerlink" title="详细的使用文档(英文)"></a>详细的使用文档(英文)</h3><p><a target="_blank" rel="noopener" href="https://git-scm.com/docs/gitignore">Git - gitignore Documentation (git-scm.com)</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://redleaves699.github.io">Redleaves699</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://redleaves699.github.io/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/">https://redleaves699.github.io/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://redleaves699.github.io" target="_blank">Redleaves699's Knowlegde Base</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">Git</a><a class="post-meta__tags" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></div><div class="post-share"><div class="social-share" data-image="/assets/sharptools/git-1.svg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"><img class="cover" src="/assets/cover/20260110101733.svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发</div></div><div class="info-2"><div class="info-item-1">为什么使用 clangd 套件最直接原因：微软式开源使得我无法在 VSCodium 上使用微软的 C&#x2F;C++ 套件（以下简称 cpptools），可以在这个链接查看相关讨论。间接原因：clangd 的效率更高，代码提示效果更好，比 cpptools 好用。来自知乎，Github，以及多个个人博客的多位博主用实际使用体验验证了上述结论。 使用 clangd 套件的方法clangd套件包含 clangd Language Server 与 VSCode 插件两部分。在 VSCode 上使用 clangd 的方法如下：  在 VSCode 安装 clangd 插件，关闭 cpptools 的 Intelli Sense Engine 以避免代码高亮冲突。 在当前操作系统安装 clangd 并设置环境变量。（Linux 直接运行sudo apt install clangd即可）完成上述两项配置之后，即可正常使用 clangd 插件编写单文件程序。  如果要在较为复杂的工程中正常使用 clangd，则需要更多配置，步骤如下：  在 .VSCode&#x2F;settings.j...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/11/02/Sharp%20Tools/GitHub%20resource/" title="解决GitHub资源访问问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-02</div><div class="info-item-2">解决GitHub资源访问问题</div></div><div class="info-2"><div class="info-item-1">问题一：访问GitHub速度很慢平时，访问GitHub非常不稳定，访问速度忽快忽慢，有时还打不开。从GitHub上下载文件也很让人头痛。 解决方法一：关闭计算机代理Windows10系统默认开启网页代理选项，这样会加快国内网站的访问速度。但是，这个代理会影响国外网站的解析。所以要提升访问GitHub的速度，就要关闭它。 关闭方法：Win10设置 -&gt; 网络和Internet -&gt; 代理，将自动设置代理选项的自动检测设置开关关闭。 解决方法二：使用CDN加速在网页按如下格式输入网址，可以使用CDN加速，这样访问仓库里的文件就会快一些 1https://cdn.jsdelivr.net/gh/&#123;你的github用户名&#125;/&#123;仓库名称&#125;/&#123;仓库具体路径&#125;  这是我存在GitHub仓库里的一张图片，可以正常打开  以下是一个生成CDN加速链接的Python脚本： 使用时，新建一个名为CDN的目录，与.git放在同一目录，并添加到.gitignore中 1234567891011121314151617181920212...</div></div></div></a><a class="pagination-related" href="/2021/09/14/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9C%A8%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2LearnGitBranch/" title="在本地部署LearnGitBranch"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-14</div><div class="info-item-2">在本地部署LearnGitBranch</div></div><div class="info-2"><div class="info-item-1">什么是LearnGitBranchLearnGitBranch是一款基于javascript开发的Git学习平台，平台以生动的图形化界面和闯关的方式，帮助我们学习Git的使用。大大降低了Git学习的门槛。 为什么在本地部署？网络版本在这里，方便快捷。 网络版： Learn Git Branching中文 Learn Git Branching英文 众所周知，有计算机的地方，不一定就有网络，有时候，网络信号不好，1KB&#x2F;s的网速，让人无法忍受。我们能不能在本地部署LearnGitBranch，随时随地方便的练习和复习呢？当然可以！ 如何在本地部署在这里的README文件可以看到作者对于部署方法的建议，这里我只是把它实现了一遍，在这篇博客里，我配置了node.js环境，所以有些步骤可以省略。 12345678910111213141516# 以下命令均在git bash内执行，执行前，先进入源代码所在目录# 检查相关组件版本node --versionnpm --versionnpx --version# 安装gulp相关组件npm rm --global gulpnpm ...</div></div></div></a><a class="pagination-related" href="/2023/02/05/Sharp%20Tools/Anaconda%E6%93%8D%E4%BD%9C%E9%80%9F%E6%9F%A5/" title="Anaconda Python工具的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-05</div><div class="info-item-2">Anaconda Python工具的使用</div></div><div class="info-2"><div class="info-item-1">1. 更换conda软件源1.1  显示conda的json配置文件1conda config --show  1.2  添加镜像源123conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --set show_channel_urls yes  运行conda clean -i清除索引缓存，保证用的是镜像站提供的索引。 1.3 恢复默认镜像源删除单个链接 1conda config --remove channels &lt;your_url&gt;  恢复默认镜像源 1conda config --remove-key channels  2. 配置虚拟环境2.1 什么是虚拟环境2.2 新建虚拟环境的方法1234查看所有虚拟环境： conda info -e 启动虚拟环境...</div></div></div></a><a class="pagination-related" href="/2025/11/01/Sharp%20Tools/Docker%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="Docker简介及基础使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-01</div><div class="info-item-2">Docker简介及基础使用</div></div><div class="info-2"><div class="info-item-1">1. 学习 docker 的动机从事计算机相关行业，久闻 docker 大名，总想学习了解一下。然而，我每次上网搜索，都找不到什么平易近人的教程，要么默认你什么都掌握，要么就是讲一些概念上的东西，不贴近实际使用场景。因为工作中不常用，所以也就失去了学习的兴趣。 尽管如此，上周在软件部署时出现的问题还是让我的学习热情死灰复燃了。当时的我看到链接器那令人畏惧的报错后，第一时间的想法不是勇敢面对，而是掉头就跑——既然开发主机升级系统之前编译软件都没有问题，那就用一个和目标机器配置相同的虚拟机编译程序好了。正当我准备打开 qemu 安装系统时，docker这个词在我的脑海中浮现了。在我的印象中，它好像也有类似虚拟机的作用，而且比虚拟机的性能更好，为什么不尝试一下呢？正好趁此机会彻底把它弄明白。 由于本人使用场景有限，频率不高，所以本文只是简要介绍常用操作，不会过于深入。 2. Docker 是什么在官方资料中，这个问题已有解释，但我想在这里表达我自己的观点：docker 是一款模拟操作系统的软件。它不模拟硬件，而是如同一般应用程序一样直接使用主机本身的硬件。它利用了 Linux 内核的隔...</div></div></div></a><a class="pagination-related" href="/2024/06/12/Sharp%20Tools/PostgreSql/" title="学习PostgreSQL"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-12</div><div class="info-item-2">学习PostgreSQL</div></div><div class="info-2"><div class="info-item-1">PostgreSQL在未创建新用户时，默认登录用户是超级用户postgres。 数据库服务 启动，关闭，重启 123systemctl start postgresqlsystemctl stop postgresqlsystemctl restart postgresql  查看一个服务的状态 1systemctl status postgresql  开机时启用一个服务 1systemctl enable postgresql 开机时关闭一个服务 1systemctl disable postgresql  查看服务是否开机启动 1systemctl is-enabled postgresql  数据库用户操作 登陆postgre用户 1sudo -u postgres psql  输入登录命令，输入正确的账号密码 12psql -U postgres -d postgrespsql -U &lt;用户名&gt; -d &lt;数据库名&gt;  PostgreSQL 用户在postgresql中的对等身份验证失败问题的解决办法:修改/etc/postgresql/15/ma...</div></div></div></a><a class="pagination-related" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode&#x2F;VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C&#x2F;C++ 开发"><img class="cover" src="/assets/cover/20260110101733.svg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-10</div><div class="info-item-2">在 VSCode&#x2F;VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C&#x2F;C++ 开发</div></div><div class="info-2"><div class="info-item-1">为什么使用 clangd 套件最直接原因：微软式开源使得我无法在 VSCodium 上使用微软的 C&#x2F;C++ 套件（以下简称 cpptools），可以在这个链接查看相关讨论。间接原因：clangd 的效率更高，代码提示效果更好，比 cpptools 好用。来自知乎，Github，以及多个个人博客的多位博主用实际使用体验验证了上述结论。 使用 clangd 套件的方法clangd套件包含 clangd Language Server 与 VSCode 插件两部分。在 VSCode 上使用 clangd 的方法如下：  在 VSCode 安装 clangd 插件，关闭 cpptools 的 Intelli Sense Engine 以避免代码高亮冲突。 在当前操作系统安装 clangd 并设置环境变量。（Linux 直接运行sudo apt install clangd即可）完成上述两项配置之后，即可正常使用 clangd 插件编写单文件程序。  如果要在较为复杂的工程中正常使用 clangd，则需要更多配置，步骤如下：  在 .VSCode&#x2F;settings.j...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Redleaves699</div><div class="author-info-description">千里之行，始于足下</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/redleaves699"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/redleaves699" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:Algorithm_sort@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="toc-number">1.</span> <span class="toc-text">Git 快速上手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.1.</span> <span class="toc-text">Git 的作用与参考资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-PART1%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F%E4%B8%8E%E4%BB%93%E5%BA%93%E5%AD%98%E5%82%A8"><span class="toc-number">1.2.</span> <span class="toc-text">基本概念 PART1：工作区域与仓库存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-PART2%EF%BC%9A%E4%BB%93%E5%BA%93%E5%88%86%E6%94%AF%E4%B8%8E%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">基本概念 PART2：仓库分支与历史版本管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E4%BB%BB%E5%8A%A1%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">团队协作任务中的版本管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%82%E8%80%83%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E9%80%9F%E6%9F%A5"><span class="toc-number">2.</span> <span class="toc-text">Git 使用场景参考与使用方法速查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8U%E7%9B%98%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93"><span class="toc-number">2.1.</span> <span class="toc-text">在U盘上创建代码仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.</span> <span class="toc-text">查看状态常用操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1git-commit%E7%9A%84message"><span class="toc-number">2.3.</span> <span class="toc-text">修改最近一次git commit的message</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitignore-%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">.gitignore 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-gitignore%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">为什么需要.gitignore文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">简单的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3-%E8%8B%B1%E6%96%87"><span class="toc-number">3.3.</span> <span class="toc-text">详细的使用文档(英文)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用"><img src="/assets/sharptools/git-1.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git的使用"/></a><div class="content"><a class="title" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用">Git的使用</a><time datetime="2026-01-20T09:10:35.000Z" title="发表于 2026-01-20 17:10:35">2026-01-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"><img src="/assets/cover/20260110101733.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"/></a><div class="content"><a class="title" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发">在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发</a><time datetime="2026-01-10T02:17:33.000Z" title="发表于 2026-01-10 10:17:33">2026-01-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/12/18/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/%E6%82%AC%E8%80%8C%E6%9C%AA%E5%86%B3%E4%B9%8B%E9%97%AE/" title="暂时不能解决的问题">暂时不能解决的问题</a><time datetime="2025-12-18T07:31:00.000Z" title="发表于 2025-12-18 15:31:00">2025-12-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/01/Sharp%20Tools/Docker%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="Docker简介及基础使用">Docker简介及基础使用</a><time datetime="2025-11-01T12:45:40.000Z" title="发表于 2025-11-01 20:45:40">2025-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/" title="实践中理解 Linux 软件依赖机制和打包方法">实践中理解 Linux 软件依赖机制和打包方法</a><time datetime="2025-10-25T06:46:15.000Z" title="发表于 2025-10-25 14:46:15">2025-10-25</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2021 - 2026 By Redleaves699</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.0.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div><div class="footer_custom_text">Thanks for your reading.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>

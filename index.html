@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Redleaves699's Knowlegde Base - Set Sail!</title><meta name="author" content="Redleaves699"><meta name="copyright" content="Redleaves699"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="千里之行，始于足下">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Redleaves699&#39;s Knowlegde Base">
+<meta property="og:url" content="https://redleaves699.github.io/index.html">
+<meta property="og:site_name" content="Redleaves699&#39;s Knowlegde Base">
+<meta property="og:description" content="千里之行，始于足下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://redleaves699.github.io/assets/site/avatar.jpg">
+<meta property="article:author" content="Redleaves699">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redleaves699.github.io/assets/site/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Redleaves699's Knowlegde Base",
+  "alternateName": [
+    "Set Sail!",
+    "redleaves699.github.io"
+  ],
+  "url": "https://redleaves699.github.io/"
+}</script><link rel="shortcut icon" href="/assets/site/sign2.svg"><link rel="canonical" href="https://redleaves699.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redleaves699\'s Knowlegde Base',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 所有文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-tools"></i><span> 在线工具</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/assets/site/library.svg" alt="Logo"><span class="site-name">Redleaves699's Knowlegde Base</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-bookmark"></i><span> 所有文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-tools"></i><span> 在线工具</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Redleaves699's Knowlegde Base</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/redleaves699" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:Algorithm_sort@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用"><img class="post-bg" src="/assets/sharptools/git-1.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git的使用"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用">Git的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-20T09:10:35.000Z" title="发表于 2026-01-20 17:10:35">2026-01-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></span></div><div class="content">Git 快速上手Git 的作用与参考资料Git是一个开源的分布式版本控制系统。更多内容请参考：起步-Git-是什么深入理解Git：从原理到实践的全面指南关于HEAD代码版本控制用SVN还是Git好？- 腾讯技术工程的回答 - 知乎【GeekHour】一小时Git教程Git 模拟器 基本概念 PART1：工作区域与仓库存储 Git 如何追踪文件的变化？ 追踪新旧文件变化需要把新旧文件放在至少两个区域做对比。如果需要追踪新文件与任意历史时期文件的变动，那还需要一个存储任意时期历史文件的区域。遵循这个逻辑，Git 设计了三个区域：工作区，暂存区（stage）和仓库区。  工作区就是我们编辑文件的区域，是电脑中实际的目录。这里的文件会被用户随时修改，永远是最新的。 暂存区（又称索引，index）是由 git 管理的，存放旧文件的区域。git 在对比暂存区和工作区的内容后，告知用户文件有那些变动。 仓库区是由 git 管理的，存放历史文件的区域。这个仓库使得 git 可以追踪新文件与任意历史时期文件（以下均称作历史版本），以及任意两个历史版本之间的变动。分为本地仓库和远程仓库。   处在不...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"><img class="post-bg" src="/assets/cover/20260110101733.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发">在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-10T02:17:33.000Z" title="发表于 2026-01-10 10:17:33">2026-01-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></span></div><div class="content">为什么使用 clangd 套件最直接原因：微软式开源使得我无法在 VSCodium 上使用微软的 C&#x2F;C++ 套件（以下简称 cpptools），可以在这个链接查看相关讨论。间接原因：clangd 的效率更高，代码提示效果更好，比 cpptools 好用。来自知乎，Github，以及多个个人博客的多位博主用实际使用体验验证了上述结论。 使用 clangd 套件的方法clangd套件包含 clangd Language Server 与 VSCode 插件两部分。在 VSCode 上使用 clangd 的方法如下：  在 VSCode 安装 clangd 插件，关闭 cpptools 的 Intelli Sense Engine 以避免代码高亮冲突。 在当前操作系统安装 clangd 并设置环境变量。（Linux 直接运行sudo apt install clangd即可）完成上述两项配置之后，即可正常使用 clangd 插件编写单文件程序。  如果要在较为复杂的工程中正常使用 clangd，则需要更多配置，步骤如下：  在 .VSCode&#x2F;settings.j...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/12/18/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/%E6%82%AC%E8%80%8C%E6%9C%AA%E5%86%B3%E4%B9%8B%E9%97%AE/" title="暂时不能解决的问题">暂时不能解决的问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-18T07:31:00.000Z" title="发表于 2025-12-18 15:31:00">2025-12-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/">感想随笔</a></span></div><div class="content">1.猜测排列有一个长度为n的排列，给定一些猜测和这些猜测中位置正确的数字的个数，问应该如何猜测，至少经过多少次猜测能够确定这个排列？ 猜想$O(nlog(n))$。和信息论可能有关系。 2.编程珠玑第八章习题4If the elements in the input array are random real numbers chosen uniformly from [ -1, 1 ], what is the expected value of the maximum subvector? 该问题属于随机过程与极值理论交叉领域，目前无通用闭式解。从n&#x3D;1到n&#x3D;2，期望值从$0$增至$\frac{5}{12}$​。可以发现随数组长度增加，最大子数组和期望值增长。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/01/Sharp%20Tools/Docker%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="Docker简介及基础使用">Docker简介及基础使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-01T12:45:40.000Z" title="发表于 2025-11-01 20:45:40">2025-11-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></span></div><div class="content">1. 学习 docker 的动机从事计算机相关行业，久闻 docker 大名，总想学习了解一下。然而，我每次上网搜索，都找不到什么平易近人的教程，要么默认你什么都掌握，要么就是讲一些概念上的东西，不贴近实际使用场景。因为工作中不常用，所以也就失去了学习的兴趣。 尽管如此，上周在软件部署时出现的问题还是让我的学习热情死灰复燃了。当时的我看到链接器那令人畏惧的报错后，第一时间的想法不是勇敢面对，而是掉头就跑——既然开发主机升级系统之前编译软件都没有问题，那就用一个和目标机器配置相同的虚拟机编译程序好了。正当我准备打开 qemu 安装系统时，docker这个词在我的脑海中浮现了。在我的印象中，它好像也有类似虚拟机的作用，而且比虚拟机的性能更好，为什么不尝试一下呢？正好趁此机会彻底把它弄明白。 由于本人使用场景有限，频率不高，所以本文只是简要介绍常用操作，不会过于深入。 2. Docker 是什么在官方资料中，这个问题已有解释，但我想在这里表达我自己的观点：docker 是一款模拟操作系统的软件。它不模拟硬件，而是如同一般应用程序一样直接使用主机本身的硬件。它利用了 Linux 内核的隔...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/" title="实践中理解 Linux 软件依赖机制和打包方法">实践中理解 Linux 软件依赖机制和打包方法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-25T06:46:15.000Z" title="发表于 2025-10-25 14:46:15">2025-10-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="content">——记一次发布 Linux 程序时遇到的问题及解决方案 万事俱备：软件在目标机上运行成功这一次待部署的软件是一个代码约 2000 行的，使用 C++ 与 wxWidgets 图形库编写的一款简单的上位机软件，运行平台为 Linux 操作系统。目标机器为一台安装了 Debian12 的 amd64 主机。因业务需求，该主机必须单机运行，不能接入任何网络。开发主机也是使用 Debian12 系统的 amd64 主机。故将开发主机上编译好的二进制文件部署到目标机器时，软件可以正常运行。后续又对软件进行了几次修改和重新部署，均未发生问题。 埋下隐患：将开发主机系统由 Debian12 升级为 Debian132025年8月9日，Debian 的新稳定版 Debian13 Trixie 正式发布，新系统使用了更新的软件包，升级了 Wayland，可以支持更高的分辨率，极大优化了用户体验。2025年9月18日，我将当前系统升级到了该版本，升级时遇到了一些小问题，不过很快都得到了解决。然而，这次升级却埋下了问题的种子。 事与愿违：为什么好好的程序不能运行了？为了降低软件使用门槛，用户提出了新的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/21/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/new%20blog/" title="关于博客重构">关于博客重构</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-21T12:07:47.000Z" title="发表于 2025-10-21 20:07:47">2025-10-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/">感想随笔</a></span></div><div class="content">一、重构计划的产生2025年春天，我就已经有重构老博客的打算。重构的原因有很多。第一，旧博客使用的模板并不是原生的，而是我根据使用需求改动过的，随着使用强度的提高，暴露的问题越来越多，数学公式的 bug，markdown 显示与排版的问题逐渐体现出来，此外，随着文档的增多，加载速度也成了一大问题。第二，旧博客的很多内容是我大学时期的课程作业，以及对一些概念粗浅的理解，需要的大量的纠正甚至是重写。第三，旧博客的布局我不太喜欢了，不是很主流，且文章的分类归档搜索功能也不是很强大，与我现在建设博客的概念相悖。 二、本次重构的特点本次重构具有如下特点： 1. 文章标签——提炼主旨，凸显特点文档的标签是索引相关文章的重要属性。原来老博客的标签太多，很多标签名称不同，但意义相同，有些博客主题都是C语言，但在不同文档中，有的标签中标注“C”，有的标注“C语言”。有些标签分割不细致，相互之间有包含关系，如已有“编程语言”标签，文档中还有“C语言”，“Python语言”等标签。这些问题导致标签大量冗余，影响博客检索效率和博客性能。针对这些问题，在新博客中设定标签时，要尽可能复用已存在的标签，需要新...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/08/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/English_Learning/" title="英语学习笔记">英语学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-08T05:50:00.000Z" title="发表于 2025-10-08 13:50:00">2025-10-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/">感想随笔</a></span></div><div class="content">技巧高效理解定语从句2025年的十一假期，在阅读《人月神话》的时候，第十六章《No Sliver bullet - The essence and accident in software engineering》一节时，发现这句话不太好读：  Ada is perhaps over-rich, the natural product of process by which requirements were laid on the design.  要理解这句话，有两个难点：  laid 的意思，这是一词多意，应该理解为“提出”。这个词一旦理解错误，会让人觉得整句话不知所云。 一个比较绕的定语从句。  有一个注意的点：  product的意思，在这里不应翻译为“产品”，而应该翻译为“结果”。  这里有一个高效理解定语从句的办法，将从句中的代词翻译成就是那个的形式。例如：  Ada 语言可能过于丰富，是那个过程的自然的结果，（就是，）通过那个过程，设计的需求被提出。Ada is perhaps over-rich, the natural product of process b...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/23/Linux/Debian%20Linux%20%E7%B3%BB%E7%BB%9F%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/" title="Linux 系统的桌面环境简介">Linux 系统的桌面环境简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-07-23T07:24:15.000Z" title="发表于 2025-07-23 15:24:15">2025-07-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="content">已经使用当前的 Debian Linux 作为主力机两年了，一直都在用 Debian 的 KDE 桌面环境。开箱即用的环境，与 Windows 差不多的使用体验，几乎没有的使用门槛，以至于两年来并没有好好研究过桌面环境是如何实现的。最近，因为业务需要，我需要将一个在X86 Linux平台wxWidgets编写的程序移植到ARM Linux平台上，于是开始学习 Linux 桌面环境的细节。 图形是如何显示在屏幕上的（基于 X11）随着计算机技术的不断发展，单纯的命令行终端已经不能满足人们的使用需要。我们需要计算机帮助我们进行视频处理、图像处理、印刷排版、3D制图的功能。为了满足这些需求，用户图形接口(GUI)应运而生。 Linux 用户图形接口的基础是一个名为 X Windows System 的软件。为什么图形窗口要被称为 X 呢？是因为在英文字母表中，X 在 W 的后面，蕴含“这是下一代用户图形接口”的意思[^1]。 下面进入正题：X Windows System 分为服务端（X Server）、客户端（X Client）、窗口管理器（Windows Manager）、登录管理...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/06/09/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/repair2025/" title="记一次修电脑的经历">记一次修电脑的经历</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-06-09T13:55:47.000Z" title="发表于 2025-06-09 21:55:47">2025-06-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/">感想随笔</a></span></div><div class="content">购入新电脑2019年8月9日，为了上大学的需要，我在长沙购置了一台联想ThinkPad笔记本电脑。这台电脑伴随我度过了包括网课在内的四个学期。电脑质量非常不错，在学校摔了六七次不止，仍然安然无恙。但它还是光荣退役了，原因是这样的：2021年，正值疫情期间，那年寒假，学校因为特殊的形势，并没有放我们回家。2021年4月的某一天，我在使用电脑时将耳机放在了键盘的位置。随后，我出去上了个厕所，回来后，宿舍有人问我作业输出的结果，于是我便合上电脑，准备去宿舍支援一下舍友。这一合，用力过猛，键盘上的耳机把我的屏幕硌坏了。随后就到了5月，学校为了弥补寒假没放的遗憾，把五一假期延长了10天。于是我回家去电脑城修了一下电脑，顺便物色有没有更好的电脑。跑了好几家，选了这个联想小新Air15 2021版。 第一次屏幕开胶新电脑入手不到两个月，就出现了一个严重的问题，屏幕的左下角开胶了（当时只能观察出这个问题）。当时正好是周四，只耽误了一天的使用。周六，我去河西大学城溁湾镇的联想售后修了一下，花费一周时间，和400块钱后，我的电脑又恢复如初了。就没有深究这个问题，随后，一直到2025年5月，这台电脑也...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/05/21/others/%E8%BF%90%E7%BB%B4%E6%9D%82%E8%B0%88/" title="运维杂谈">运维杂谈</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-21T14:31:00.000Z" title="发表于 2025-05-21 22:31:00">2025-05-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></span></div><div class="content">机房运维这里存放着我做机房运维工作时的一些细节和故事。 1 温湿度标准A 类机房包括干线传输枢纽和设置长途交换机、省际&#x2F;省内骨干信令转接点、省际&#x2F;省内骨干智能网SCP、省际&#x2F;省内骨干数据网设备的电信机房及其动力机房等。 正常温、湿度范围：温度10～25℃，湿度40～70% 可接受的温、湿度范围：温度10～26℃，湿度40～75%。 B 类机房包括设置本地网汇接局、关口局、智能网SCP、信令 转接点、无线市话核心网设备、传输骨干节点、数据骨干节点（含城 域网核心层设备）、IDC、拨号服务器的通信机房及其动力机房，进口程控交换母局和5万门以上的国产程控交换母局机房及其测量室、动力机房，服务重要用户及要害部门的交换、传输、数据设备通信机房，长途干线上下话路站等。 正常温、湿度范围：温度10～28℃，湿度30～70% 可接受的温、湿度范围：温度5～28℃，湿度30～80% C 类机房包括5万门以下国产程控交换母局、城域网汇聚层数据机房及所属的动力机房，长途传输中继站等。 正常温、湿度范围：温度10～30℃,湿度30～75% 可接受的温、湿度范围：温度5～30...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/site/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Redleaves699</div><div class="author-info-description">千里之行，始于足下</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/redleaves699"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/redleaves699" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:Algorithm_sort@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用"><img src="/assets/sharptools/git-1.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git的使用"/></a><div class="content"><a class="title" href="/2026/01/20/Sharp%20Tools/git%E6%93%8D%E4%BD%9C/" title="Git的使用">Git的使用</a><time datetime="2026-01-20T09:10:35.000Z" title="发表于 2026-01-20 17:10:35">2026-01-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"><img src="/assets/cover/20260110101733.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发"/></a><div class="content"><a class="title" href="/2026/01/10/Sharp%20Tools/vscode%20clangd/" title="在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发">在 VSCode/VSCodium 上使用 clangd 插件替换微软 cpptools，辅助 C/C++ 开发</a><time datetime="2026-01-10T02:17:33.000Z" title="发表于 2026-01-10 10:17:33">2026-01-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/12/18/%E6%84%9F%E6%83%B3%E9%9A%8F%E7%AC%94/%E6%82%AC%E8%80%8C%E6%9C%AA%E5%86%B3%E4%B9%8B%E9%97%AE/" title="暂时不能解决的问题">暂时不能解决的问题</a><time datetime="2025-12-18T07:31:00.000Z" title="发表于 2025-12-18 15:31:00">2025-12-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/01/Sharp%20Tools/Docker%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="Docker简介及基础使用">Docker简介及基础使用</a><time datetime="2025-11-01T12:45:40.000Z" title="发表于 2025-11-01 20:45:40">2025-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/25/Linux/Linux%20%E8%BD%AF%E4%BB%B6%E4%BE%9D%E8%B5%96%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%93%E5%8C%85/" title="实践中理解 Linux 软件依赖机制和打包方法">实践中理解 Linux 软件依赖机制和打包方法</a><time datetime="2025-10-25T06:46:15.000Z" title="发表于 2025-10-25 14:46:15">2025-10-25</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C-%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">C++语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">C语言</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">Java语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">Python语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Verilog%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">Verilog语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/awk%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">awk语言</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><span class="card-category-list-name">前端开发</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="card-category-list-name">密码学</span><span class="card-category-list-count">2</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/C/" style="font-size: 1.33em; color: rgb(192, 140, 50);">C</a><a href="/tags/arm/" style="font-size: 1.15em; color: rgb(50, 156, 50);">arm</a><a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/" style="font-size: 1.21em; color: rgb(50, 50, 158);">交叉编译</a><a href="/tags/SoC/" style="font-size: 1.21em; color: rgb(50, 192, 182);">SoC</a><a href="/tags/RISC-V/" style="font-size: 1.15em; color: rgb(80, 188, 108);">RISC-V</a><a href="/tags/Linux/" style="font-size: 1.27em; color: rgb(157, 182, 136);">Linux</a><a href="/tags/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/" style="font-size: 1.21em; color: rgb(128, 115, 100);">桌面环境</a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.15em; color: rgb(179, 50, 181);">命令行</a><a href="/tags/bash/" style="font-size: 1.21em; color: rgb(50, 184, 139);">bash</a><a href="/tags/Glibc/" style="font-size: 1.15em; color: rgb(97, 101, 144);">Glibc</a><a href="/tags/Release/" style="font-size: 1.15em; color: rgb(150, 50, 59);">Release</a><a href="/tags/Git/" style="font-size: 1.27em; color: rgb(192, 134, 159);">Git</a><a href="/tags/GitHub/" style="font-size: 1.15em; color: rgb(106, 116, 58);">GitHub</a><a href="/tags/Anaconda/" style="font-size: 1.15em; color: rgb(69, 178, 50);">Anaconda</a><a href="/tags/Python/" style="font-size: 1.21em; color: rgb(95, 114, 75);">Python</a><a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 1.45em; color: rgb(194, 50, 50);">开发工具</a><a href="/tags/docker/" style="font-size: 1.15em; color: rgb(180, 116, 185);">docker</a><a href="/tags/%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/" style="font-size: 1.15em; color: rgb(89, 63, 185);">部署工具</a><a href="/tags/markdown/" style="font-size: 1.15em; color: rgb(63, 50, 180);">markdown</a><a href="/tags/%E6%96%87%E6%A1%A3%E5%B7%A5%E5%85%B7/" style="font-size: 1.15em; color: rgb(59, 94, 92);">文档工具</a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.15em; color: rgb(147, 184, 124);">数据库</a><a href="/tags/gdb/" style="font-size: 1.15em; color: rgb(191, 181, 181);">gdb</a><a href="/tags/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 1.15em; color: rgb(50, 50, 164);">调试工具</a><a href="/tags/Educoder%E5%AE%9E%E8%AE%AD/" style="font-size: 1.15em; color: rgb(74, 50, 50);">Educoder实训</a><a href="/tags/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/" style="font-size: 1.15em; color: rgb(50, 73, 69);">逆向分析</a><a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 1.21em; color: rgb(171, 61, 107);">密码学</a><a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 1.21em; color: rgb(141, 50, 160);">信息安全</a><a href="/tags/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" style="font-size: 1.21em; color: rgb(176, 50, 103);">非对称加密</a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.21em; color: rgb(50, 50, 159);">前端</a><a href="/tags/%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9/" style="font-size: 1.15em; color: rgb(148, 109, 50);">网页内容</a><a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 1.15em; color: rgb(135, 60, 50);">运维</a><a href="/tags/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" style="font-size: 1.15em; color: rgb(167, 196, 50);">英语学习</a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.21em; color: rgb(188, 167, 174);">生活</a><a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.21em; color: rgb(142, 50, 64);">随笔</a><a href="/tags/%E6%8F%90%E9%97%AE/" style="font-size: 1.15em; color: rgb(141, 157, 120);">提问</a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.15em; color: rgb(172, 82, 189);">数学</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.39em; color: rgb(69, 77, 124);">算法</a><a href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/" style="font-size: 1.21em; color: rgb(76, 161, 50);">分治法</a><a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 1.15em; color: rgb(50, 155, 50);">递归</a><a href="/tags/%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96/" style="font-size: 1.15em; color: rgb(50, 191, 50);">算法优化</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/12/">
+            <span class="card-archive-list-date">
+              十二月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              十月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              七月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/06/">
+            <span class="card-archive-list-date">
+              六月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              五月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">43</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">56.3k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-01T08:31:01.810Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2021 - 2026 By Redleaves699</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.0.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div><div class="footer_custom_text">Thanks for your reading.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["贵有恒何必三更起五更睡，最无益只怕一日曝十日寒","长风破浪会有时，直挂云帆济沧海"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["贵有恒何必三更起五更睡，最无益只怕一日曝十日寒","长风破浪会有时，直挂云帆济沧海"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>
